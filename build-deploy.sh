@@ -15,23 +15,39 @@ echo "==> Building front-end assets (Tailwind/Vite)..."
 npm install
 npm run build
 
+# Empty the local framework caches but KEEP the directory structure + the
+# .gitignore placeholders, so the required storage/framework/* dirs ship in the
+# zip (their absence causes "Please provide a valid cache path." on the server).
+echo "==> Clearing local caches..."
+php artisan optimize:clear || true
+
 echo "==> Creating deployment zip..."
 rm -rf deploy
 mkdir -p deploy
 
-# Zip the whole app EXCEPT things the server doesn't need or must not receive.
+# IMPORTANT: exclude the ".git" repo dir only — NOT ".gitignore" files, which
+# keep the otherwise-empty storage/framework/* and bootstrap/cache dirs alive.
+# We exclude generated cache *content* but never the directories themselves.
 zip -r -q deploy/amadersomaj-deploy.zip . \
-  -x '*.git*' \
+  -x '.git/*' \
   -x 'node_modules/*' \
   -x 'deploy/*' \
   -x 'tests/*' \
-  -x 'storage/framework/cache/data/*' \
-  -x 'storage/framework/sessions/*' \
-  -x 'storage/framework/views/*' \
-  -x 'storage/logs/*' \
+  -x 'storage/framework/views/*.php' \
+  -x 'storage/logs/*.log' \
+  -x 'bootstrap/cache/*.php' \
   -x 'database/*.sqlite' \
+  -x 'database/*.sqlite-journal' \
   -x '.env' \
   -x 'build-deploy.sh'
+
+# Safety check: the framework dirs MUST be in the archive (empty dirs are kept
+# alive by their .gitignore). Fail loudly if any are missing.
+for d in storage/framework/views storage/framework/cache storage/framework/sessions bootstrap/cache; do
+  if ! unzip -l deploy/amadersomaj-deploy.zip "$d/*" >/dev/null 2>&1; then
+    echo "WARNING: $d not found in zip — the server will error. Check .gitignore exists in it."
+  fi
+done
 
 echo ""
 echo "==> Done:  deploy/amadersomaj-deploy.zip"

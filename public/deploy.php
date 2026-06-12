@@ -32,6 +32,24 @@ if (! hash_equals($SECRET, (string) ($_GET['token'] ?? ''))) {
 
 header('Content-Type: text/plain; charset=utf-8');
 
+// Ensure the writable framework directories exist. Their absence causes
+// "Please provide a valid cache path." Create them before booting Laravel.
+$base = dirname(__DIR__);
+foreach ([
+    '/storage/framework',
+    '/storage/framework/cache',
+    '/storage/framework/cache/data',
+    '/storage/framework/sessions',
+    '/storage/framework/views',
+    '/storage/logs',
+    '/bootstrap/cache',
+] as $dir) {
+    if (! is_dir($base . $dir)) {
+        @mkdir($base . $dir, 0775, true);
+        echo "created {$dir}\n";
+    }
+}
+
 require __DIR__ . '/../vendor/autoload.php';
 
 /** @var \Illuminate\Foundation\Application $app */

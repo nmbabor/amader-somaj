@@ -151,6 +151,13 @@ There's no terminal, so use the included helper:
 - **500 error / blank page:** temporarily set `APP_DEBUG=true` in `.env`, re-run
   `deploy.php` (to clear config cache), reload, read the error, then set it back
   to `false`. Also check `storage/logs/laravel.log`.
+- **"Please provide a valid cache path.":** the `storage/framework/views`
+  directory (and siblings) don't exist on the server. Create
+  `storage/framework/{cache,cache/data,sessions,views}`, `storage/logs`, and
+  `bootstrap/cache`, set `storage/` + `bootstrap/cache/` to 755, then **delete
+  everything inside `bootstrap/cache/`** (a config cache built while the dir was
+  missing keeps the bad path) and reload. Re-running `deploy.php` also recreates
+  these dirs automatically.
 - **"No application encryption key":** `APP_KEY` missing in `.env` — it should
   start with `base64:`.
 - **CSS/JS missing:** `public/build/` wasn't uploaded, or `npm run build` wasn't
