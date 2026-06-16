@@ -44,7 +44,7 @@
     </section>
 
     {{-- Team --}}
-    <section class="py-16">
+    <section class="hidden py-16">
         <div class="container-section">
             <div class="mx-auto max-w-2xl text-center">
                 <h2 class="section-title">আমাদের পরিচালনা পর্ষদ</h2>
