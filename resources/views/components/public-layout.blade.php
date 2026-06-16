@@ -36,7 +36,8 @@
     <meta name="twitter:description" content="{{ $desc }}">
     <meta name="twitter:image" content="{{ $image }}">
 
-    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+    @php $favicon = setting('site_favicon'); @endphp
+    <link rel="icon" href="{{ $favicon ? asset('storage/'.$favicon) : asset('favicon.ico') }}">
 
     {{-- Bengali fonts: Hind Siliguri + Noto Sans Bengali --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">

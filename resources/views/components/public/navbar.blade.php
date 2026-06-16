@@ -9,6 +9,7 @@
         ['route' => 'contact.index', 'label' => 'যোগাযোগ'],
     ];
     $siteName = setting('site_name', 'আমাদের সমাজ');
+    $logo = setting('site_logo');
 @endphp
 
 <header x-data="{ open: false, scrolled: false }"
@@ -19,11 +20,15 @@
         <div class="flex h-16 items-center justify-between lg:h-20">
             {{-- Brand --}}
             <a href="{{ route('home') }}" class="flex items-center gap-3">
-                <span class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-700 text-lg font-bold text-white shadow">আ</span>
-                <span class="leading-tight">
-                    <span class="block text-lg font-bold text-brand-800">{{ $siteName }}</span>
-                    <span class="block text-xs text-gray-500">{{ setting('site_tagline', '৭নং ধর্মপুর ইউনিয়ন') }}</span>
-                </span>
+                @if($logo)
+                    <img src="{{ asset('storage/'.$logo) }}" alt="{{ $siteName }}" class="h-11 w-auto lg:h-14">
+                @else
+                    <span class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-700 text-lg font-bold text-white shadow">আ</span>
+                    <span class="leading-tight">
+                        <span class="block text-lg font-bold text-brand-800">{{ $siteName }}</span>
+                        <span class="block text-xs text-gray-500">{{ setting('site_tagline', '৭নং ধর্মপুর ইউনিয়ন') }}</span>
+                    </span>
+                @endif
             </a>
 
             {{-- Desktop nav --}}

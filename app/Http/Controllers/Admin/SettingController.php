@@ -22,6 +22,10 @@ class SettingController extends Controller
                 'site_description' => ['সাইটের বর্ণনা (SEO)', 'textarea'],
                 'founded_year' => ['প্রতিষ্ঠার বছর', 'number'],
             ],
+            'লোগো ও ফেভিকন' => [
+                'site_logo' => ['সাইট লোগো (হেডার ও লগইন পেজে দেখাবে)', 'image'],
+                'site_favicon' => ['ফেভিকন (ব্রাউজার ট্যাব আইকন — PNG/ICO)', 'image'],
+            ],
             'হোম হিরো' => [
                 'hero_title' => ['হিরো শিরোনাম', 'text'],
                 'hero_subtitle' => ['হিরো বর্ণনা', 'textarea'],
@@ -67,7 +71,11 @@ class SettingController extends Controller
             foreach ($fields as $key => [$label, $type]) {
                 if ($type === 'image') {
                     if ($request->hasFile($key)) {
-                        $request->validate([$key => ['image', 'max:4096']]);
+                        // Favicons may be .ico/.png/.svg; other images use the image rule.
+                        $rules = $key === 'site_favicon'
+                            ? ['file', 'mimes:png,ico,svg,jpg,jpeg,webp', 'max:2048']
+                            : ['image', 'max:4096'];
+                        $request->validate([$key => $rules]);
                         $old = Setting::get($key);
                         if ($old) {
                             Storage::disk('public')->delete($old);
@@ -78,7 +86,11 @@ class SettingController extends Controller
                     continue;
                 }
 
-                Setting::set($key, $request->input($key), 'general', $type);
+                // Only touch fields actually present in the submission, so a
+                // partial post can never blank out the other settings.
+                if ($request->has($key)) {
+                    Setting::set($key, $request->input($key), 'general', $type);
+                }
             }
         }
 
