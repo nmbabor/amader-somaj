@@ -5,6 +5,7 @@
     $phone = setting('contact_phone', '০১৭০০-০০০০০০');
     $email = setting('contact_email', 'info@amadersomaj.org');
     $address = setting('contact_address', '৭নং ধর্মপুর ইউনিয়ন, বাংলাদেশ');
+    $logo = setting('site_logo');
 @endphp
 
 <footer class="bg-brand-900 text-brand-100">
@@ -13,8 +14,13 @@
             {{-- About --}}
             <div class="lg:col-span-1">
                 <div class="flex items-center gap-3">
-                    <span class="flex h-11 w-11 items-center justify-center rounded-full bg-white text-lg font-bold text-brand-800">আ</span>
-                    <span class="text-lg font-bold text-white">{{ $siteName }}</span>
+                     @if($logo)
+                        <img src="{{ asset('storage/'.$logo) }}" alt="{{ $siteName }}" class="h-auto w-auto">
+                    @else
+                        <span class="flex h-11 w-11 items-center justify-center rounded-full bg-white text-lg font-bold text-brand-800">আ</span>
+                        <span class="text-lg font-bold text-white">{{ $siteName }}</span>
+                    @endif
+                    
                 </div>
                 <p class="mt-4 text-sm leading-relaxed text-brand-200">
                     {{ setting('footer_about', 'একটি গণগ্রন্থাগার দিয়ে শুরু হওয়া আমাদের এই সংগঠনের লক্ষ্য ইউনিয়নের উন্নয়ন, শিক্ষার্থী ও মানুষের পাশে দাঁড়ানো এবং সামাজিক সচেতনতা গড়ে তোলা।') }}

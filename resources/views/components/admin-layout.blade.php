@@ -37,8 +37,13 @@
     <aside class="fixed inset-y-0 left-0 z-40 w-64 transform overflow-y-auto bg-brand-900 text-brand-100 transition-transform lg:translate-x-0"
            :class="sidebar ? 'translate-x-0' : '-translate-x-full'">
         <div class="flex h-16 items-center gap-3 border-b border-brand-800 px-5">
-            <span class="flex h-9 w-9 items-center justify-center rounded-full bg-white text-base font-bold text-brand-800">আ</span>
-            <span class="font-bold text-white">আমাদের সমাজ</span>
+            @php $logo = setting('site_logo'); @endphp
+             @if($logo)
+                <img src="{{ asset('storage/'.$logo) }}" alt="{{ setting('site_name', 'আমাদের সমাজ') }}" class="h-auto w-auto">
+            @else
+                <span class="flex h-9 w-9 items-center justify-center rounded-full bg-white text-base font-bold text-brand-800">আ</span>
+                <span class="font-bold text-white">আমাদের সমাজ</span>
+            @endif
         </div>
         <nav class="space-y-1 p-3">
             @foreach($nav as $item)
