@@ -25,11 +25,6 @@ const yellow = {
     50: '#fffbe6', 100: '#fff6c2', 200: '#ffec85', 300: '#ffe14d', 400: '#ffd827',
     500: '#ffd101', 600: '#e0b300', 700: '#b88c00', 800: '#946f00', 900: '#7a5c00', 950: '#463300',
 };
-// Neutral ramp spanning surface (#efefef) → dark (#1f201b).
-const neutral = {
-    50: '#efefef', 100: '#e6e6e5', 200: '#d6d6d4', 300: '#b9b9b5', 400: '#8e8e89',
-    500: '#6a6a65', 600: '#4d4e49', 700: '#3a3b36', 800: '#2a2b26', 900: '#1f201b', 950: '#141510',
-};
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -48,27 +43,15 @@ export default {
                 bangla: ['"Hind Siliguri"', '"Noto Sans Bengali"', 'sans-serif'],
             },
             colors: {
-                // Primary green
-                brand: green,
+                // Palette tokens used by the PUBLIC frontend. The admin panel
+                // keeps Tailwind's default green/blue/amber/gray, so it is left
+                // visually unchanged (per request: frontend only).
+                brand: green,        // primary green — frontend buttons/CTAs/nav/hero/footer
                 primary: green,
-                green: green,
-                // Secondary blue (links, accents). Re-route info-ish hues to it.
-                secondary: blue,
-                blue: blue,
-                sky: blue,
-                indigo: blue,
-                purple: blue,
-                // Accent yellow (badges, warnings). Re-route warm hues to it.
-                accent: yellow,
-                amber: yellow,
-                yellow: yellow,
-                orange: yellow,
-                rose: yellow,
-                // Neutrals tuned to the palette (surface … dark)
-                gray: neutral,
-                // Explicit palette tokens
-                surface: '#efefef',
-                dark: '#1f201b',
+                secondary: blue,     // links, accents
+                accent: yellow,      // badges, highlights
+                surface: '#efefef',  // cards, sections
+                dark: '#1f201b',     // text, dark backgrounds
             },
         },
     },
