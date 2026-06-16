@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Brand palette — single source of truth (also mirrored in tailwind.config.js). */
+:root {
+    --color-primary: #0ca85e;   /* Green  — buttons, CTAs, highlights */
+    --color-secondary: #0061fe; /* Blue   — links, accents */
+    --color-accent: #ffd101;    /* Yellow — badges, warnings, hover states */
+    --color-dark: #1f201b;      /* Near-black — text, dark backgrounds */
+    --color-white: #ffffff;     /* White  — main background */
+    --color-surface: #efefef;   /* Light gray — cards, sections */
+}
+
 @layer base {
     [x-cloak] {
         display: none !important;
@@ -12,11 +22,16 @@
     }
 
     body {
-        @apply font-bangla text-gray-700 antialiased;
+        @apply bg-white font-bangla text-gray-700 antialiased;
     }
 
     h1, h2, h3, h4, h5, h6 {
-        @apply font-bangla;
+        @apply font-bangla text-dark;
+    }
+
+    ::selection {
+        background-color: var(--color-primary);
+        color: var(--color-white);
     }
 }
 
@@ -29,24 +44,30 @@
         @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2;
     }
 
+    /* Primary CTA — exact palette green (#0ca85e = brand-500). */
     .btn-primary {
-        @apply btn bg-brand-700 text-white hover:bg-brand-800 focus:ring-brand-600;
+        @apply btn bg-brand-500 text-white hover:bg-brand-600 focus:ring-brand-500;
     }
 
     .btn-outline {
-        @apply btn border border-brand-700 text-brand-700 hover:bg-brand-50 focus:ring-brand-600;
+        @apply btn border border-brand-500 text-brand-600 hover:bg-brand-50 focus:ring-brand-500;
+    }
+
+    /* Secondary action — palette blue (#0061fe = secondary-600). */
+    .btn-secondary {
+        @apply btn bg-secondary-600 text-white hover:bg-secondary-700 focus:ring-secondary-600;
     }
 
     .btn-white {
-        @apply btn bg-white text-brand-800 hover:bg-brand-50 focus:ring-white;
+        @apply btn bg-white text-brand-700 hover:bg-brand-50 focus:ring-white;
     }
 
     .section-title {
-        @apply text-2xl font-bold text-gray-900 sm:text-3xl;
+        @apply text-2xl font-bold text-dark sm:text-3xl;
     }
 
     .card {
-        @apply overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-100 transition hover:shadow-md;
+        @apply overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-200 transition hover:shadow-md;
     }
 
     .form-label {
@@ -60,6 +81,11 @@
     }
 
     .prose-bangla {
-        @apply leading-relaxed text-gray-700 [&>p]:mb-4 [&>h2]:mt-6 [&>h2]:mb-3 [&>h2]:text-xl [&>h2]:font-bold [&>h2]:text-gray-900 [&>ul]:mb-4 [&>ul]:list-disc [&>ul]:pl-6;
+        @apply leading-relaxed text-gray-700 [&>p]:mb-4 [&>h2]:mt-6 [&>h2]:mb-3 [&>h2]:text-xl [&>h2]:font-bold [&>h2]:text-dark [&>ul]:mb-4 [&>ul]:list-disc [&>ul]:pl-6;
+    }
+
+    /* Inline content links use the secondary blue. */
+    .prose-bangla a {
+        @apply font-medium text-secondary-600 underline decoration-secondary-300 underline-offset-2 hover:text-secondary-700;
     }
 }
