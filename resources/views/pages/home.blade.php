@@ -6,16 +6,16 @@
             <div>
                 <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium ring-1 ring-white/20">
                     <span class="h-2 w-2 rounded-full bg-brand-300"></span>
-                    {{ setting('site_tagline', '৭নং ধর্মপুর ইউনিয়ন') }}
+                    {{ setting('site_tagline', 'আমাদের সমাজ ফাউন্ডেশন') }}
                 </span>
                 <h1 class="mt-5 text-4xl font-bold leading-tight sm:text-5xl">
-                    {{ setting('hero_title', 'আমরা গড়ি আলোকিত সমাজ') }}
+                    {{ setting('hero_title', 'সবাই মিলেই আমাদের সমাজ') }}
                 </h1>
                 <p class="mt-5 max-w-xl text-lg leading-relaxed text-brand-100">
-                    {{ setting('hero_subtitle', 'একটি গণগ্রন্থাগার দিয়ে যাত্রা শুরু। আমাদের লক্ষ্য — ইউনিয়নের উন্নয়ন, শিক্ষার্থী ও মানুষের পাশে দাঁড়ানো, সামাজিক সচেতনতা এবং সম্মিলিত উদ্যোগে একটি সুন্দর আগামী।') }}
+                    {{ setting('hero_subtitle', 'আমাদের লক্ষ্য একটি শিক্ষিত, সচেতন, নৈতিক ও মানবিক সমাজ গড়ে তোলা, যেখানে প্রতিটি মানুষ সমানভাবে শিক্ষা, সংস্কৃতি, সমাজসেবা, খেলাধুলা ও ধর্মীয় মূল্যবোধের চর্চার মাধ্যমে সমাজ গঠনে অংশগ্রহণের সুযোগ লাভ করবে।') }}
                 </p>
                 <div class="mt-8 flex flex-wrap gap-3">
-                    <a href="{{ route('donation.index') }}" class="btn-white">দান করুন</a>
+                    <a href="{{ route('donation.index') }}" class="btn-white">অনুদান দিন</a>
                     <a href="{{ route('membership.index') }}" class="btn border border-white/40 text-white hover:bg-white/10">সদস্য হোন</a>
                 </div>
             </div>
@@ -151,7 +151,7 @@
             <h2 class="text-2xl font-bold sm:text-3xl">আপনার সহযোগিতায় বদলে যাবে আমাদের সমাজ</h2>
             <p class="mx-auto mt-3 max-w-2xl text-brand-100">ছোট ছোট উদ্যোগ মিলেই বড় পরিবর্তন। আজই আমাদের সাথে যুক্ত হোন কিংবা একটি অনুদান দিয়ে পাশে দাঁড়ান।</p>
             <div class="mt-7 flex flex-wrap justify-center gap-3">
-                <a href="{{ route('donation.index') }}" class="btn-white">এখনই দান করুন</a>
+                <a href="{{ route('donation.index') }}" class="btn-white">এখনই অনুদান দিন</a>
                 <a href="{{ route('membership.index') }}" class="btn border border-white/40 text-white hover:bg-white/10">সদস্য হোন</a>
             </div>
         </div>
