@@ -2,6 +2,7 @@
     $links = [
         ['route' => 'home', 'label' => 'হোম'],
         ['route' => 'about', 'label' => 'আমাদের সম্পর্কে'],
+        ['route' => 'board', 'label' => 'পরিচালনা পর্ষদ'],
         ['route' => 'activities.index', 'label' => 'কার্যক্রম'],
         ['route' => 'gallery.photos', 'label' => 'ছবি গ্যালারি'],
         ['route' => 'gallery.videos', 'label' => 'ভিডিও গ্যালারি'],

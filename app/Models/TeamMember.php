@@ -14,14 +14,29 @@ class TeamMember extends Model implements HasMedia
     use HasFactory;
     use InteractsWithMedia;
 
+    /**
+     * Board categories, in display order. Keys are stored in the database.
+     */
+    public const CATEGORIES = [
+        'advisory' => 'উপদেষ্টা প্যানেল',
+        'executive' => 'কার্যনির্বাহী পরিষদ',
+        'lifetime' => 'আজীবন সদস্য',
+        'general' => 'সাধারণ সদস্য',
+    ];
+
     protected $fillable = [
-        'name', 'designation', 'bio', 'email', 'phone',
+        'name', 'designation', 'category', 'bio', 'email', 'phone',
         'facebook', 'linkedin', 'sort_order', 'is_active',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    public function getCategoryLabelAttribute(): string
+    {
+        return self::CATEGORIES[$this->category] ?? $this->category;
+    }
 
     public function registerMediaCollections(): void
     {

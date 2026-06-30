@@ -8,6 +8,14 @@
         <label class="form-label" for="designation">পদবি <span class="text-red-500">*</span></label>
         <input id="designation" name="designation" type="text" value="{{ old('designation', $member->designation ?? '') }}" required class="form-input">
     </div>
+    <div>
+        <label class="form-label" for="category">বিভাগ <span class="text-red-500">*</span></label>
+        <select id="category" name="category" required class="form-select">
+            @foreach(\App\Models\TeamMember::CATEGORIES as $value => $label)
+                <option value="{{ $value }}" @selected(old('category', $member->category ?? 'executive') === $value)>{{ $label }}</option>
+            @endforeach
+        </select>
+    </div>
     <div class="sm:col-span-2">
         <label class="form-label" for="bio">পরিচিতি</label>
         <textarea id="bio" name="bio" rows="3" class="form-textarea">{{ old('bio', $member->bio ?? '') }}</textarea>

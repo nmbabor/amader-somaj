@@ -10,9 +10,22 @@ class TeamMemberController extends Controller
 {
     public function index()
     {
-        $members = TeamMember::with('media')->orderBy('sort_order')->paginate(20);
+        $members = TeamMember::with('media')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get()
+            ->groupBy('category');
 
-        return view('admin.team.index', compact('members'));
+        // Keep the defined category order; include empty groups so admins see all sections.
+        $groups = collect(TeamMember::CATEGORIES)
+            ->map(fn ($label, $key) => [
+                'label' => $label,
+                'members' => $members->get($key, collect()),
+            ]);
+
+        $total = $groups->sum(fn ($group) => $group['members']->count());
+
+        return view('admin.team.index', compact('groups', 'total'));
     }
 
     public function create()
@@ -66,6 +79,7 @@ class TeamMemberController extends Controller
         return $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'designation' => ['required', 'string', 'max:255'],
+            'category' => ['required', 'string', 'in:' . implode(',', array_keys(TeamMember::CATEGORIES))],
             'bio' => ['nullable', 'string', 'max:2000'],
             'email' => ['nullable', 'email', 'max:255'],
             'phone' => ['nullable', 'string', 'max:20'],

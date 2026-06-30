@@ -35,10 +35,25 @@ class PageController extends Controller
 
     public function about()
     {
-        $team = TeamMember::where('is_active', true)
-            ->orderBy('sort_order')
-            ->get();
+        return view('pages.about');
+    }
 
-        return view('pages.about', compact('team'));
+    public function board()
+    {
+        $members = TeamMember::where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get()
+            ->groupBy('category');
+
+        // Preserve the defined category order, dropping empty groups.
+        $groups = collect(TeamMember::CATEGORIES)
+            ->map(fn ($label, $key) => [
+                'label' => $label,
+                'members' => $members->get($key, collect()),
+            ])
+            ->filter(fn ($group) => $group['members']->isNotEmpty());
+
+        return view('pages.board', compact('groups'));
     }
 }

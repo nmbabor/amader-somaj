@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
+Route::get('/board', [PageController::class, 'board'])->name('board');
 
 Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
 Route::get('/activities/{post:slug}', [ActivityController::class, 'show'])->name('activities.show');

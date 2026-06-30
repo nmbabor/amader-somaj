@@ -43,43 +43,31 @@
         </div>
     </section>
 
-    {{-- Team --}}
-    <section class="hidden py-16">
+    {{-- Board of directors CTA --}}
+    <section class="py-16">
         <div class="container-section">
-            <div class="mx-auto max-w-2xl text-center">
-                <h2 class="section-title">আমাদের পরিচালনা পর্ষদ</h2>
-                <p class="mt-3 text-gray-600">যাঁদের নিরলস পরিশ্রমে এগিয়ে চলেছে আমাদের সমাজ।</p>
-            </div>
+            <a href="{{ route('board') }}"
+               class="group relative block overflow-hidden rounded-3xl bg-brand-700 p-8 text-white shadow-lg ring-1 ring-brand-800 transition hover:shadow-xl sm:p-12">
+                <div class="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-white/10 transition group-hover:scale-110"></div>
+                <div class="absolute -bottom-12 -left-8 h-40 w-40 rounded-full bg-white/5"></div>
 
-            @if($team->isEmpty())
-                <p class="mt-10 rounded-xl bg-gray-50 p-8 text-center text-gray-500">শীঘ্রই পরিচালনা পর্ষদের তথ্য যুক্ত করা হবে।</p>
-            @else
-                <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                    @foreach($team as $member)
-                        <div class="card p-6 text-center">
-                            <img src="{{ $member->photo_url }}" alt="{{ $member->name }}"
-                                 class="mx-auto h-28 w-28 rounded-full object-cover ring-4 ring-brand-50">
-                            <h3 class="mt-4 text-lg font-bold text-gray-900">{{ $member->name }}</h3>
-                            <p class="text-sm font-medium text-brand-700">{{ $member->designation }}</p>
-                            @if($member->bio)
-                                <p class="mt-2 text-sm text-gray-500">{{ \Illuminate\Support\Str::limit($member->bio, 80) }}</p>
-                            @endif
-                            <div class="mt-3 flex justify-center gap-2">
-                                @if($member->facebook)
-                                    <a href="{{ $member->facebook }}" target="_blank" rel="noopener" class="text-gray-400 hover:text-brand-700" aria-label="Facebook">
-                                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
-                                    </a>
-                                @endif
-                                @if($member->phone)
-                                    <a href="tel:{{ $member->phone }}" class="text-gray-400 hover:text-brand-700" aria-label="Phone">
-                                        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
-                                    </a>
-                                @endif
-                            </div>
+                <div class="relative flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
+                    <div class="flex items-start gap-5">
+                        <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/15 ring-1 ring-white/20">
+                            <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
                         </div>
-                    @endforeach
+                        <div>
+                            <span class="text-sm font-semibold uppercase tracking-wider text-brand-100">নেতৃত্ব</span>
+                            <h2 class="mt-1 text-2xl font-bold sm:text-3xl">আমাদের পরিচালনা পর্ষদ</h2>
+                            <p class="mt-2 max-w-xl text-brand-50">যাঁদের নিরলস পরিশ্রমে এগিয়ে চলেছে আমাদের সমাজ — উপদেষ্টা প্যানেল থেকে সাধারণ সদস্য পর্যন্ত সবার পরিচিতি দেখুন।</p>
+                        </div>
+                    </div>
+                    <span class="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-5 py-3 font-semibold text-brand-700 shadow transition group-hover:gap-3">
+                        পর্ষদ দেখুন
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+                    </span>
                 </div>
-            @endif
+            </a>
         </div>
     </section>
 </x-public-layout>
