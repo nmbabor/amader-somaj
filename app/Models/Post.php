@@ -63,6 +63,6 @@ class Post extends Model
             return asset('storage/' . $this->featured_image);
         }
 
-        return 'https://placehold.co/800x450/166534/ffffff?text=' . urlencode('আমাদের সমাজ');
+        return 'https://placehold.co/800x450/166534/ffffff?text=' . urlencode('Amader Somaj');
     }
 }

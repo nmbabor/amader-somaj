@@ -33,7 +33,9 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
-            'serve' => true,
+            // Disabled: its auto-registered "storage/{path}" route (signed,
+            // private disk) would shadow the public StorageController fallback.
+            'serve' => false,
             'throw' => false,
             'report' => false,
         ],

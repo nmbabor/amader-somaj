@@ -8,13 +8,28 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StorageController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
 | Public routes
 |--------------------------------------------------------------------------
 */
+Route::get('/optimize', function () {
+    Artisan::call('optimize:clear');
+    Artisan::call('storage:link');
+    if (!file_exists(public_path('storage'))) {
+        Artisan::call('storage:link');
+    }
+    Artisan::call('migrate', ['--force' => true]);
+
+    return 'Optimization and migration completed successfully.';
+});
+// Fallback file server for hosts where the public/storage symlink isn't
+// honoured. When the symlink works, Apache serves the file before this runs.
+Route::get('/storage/{path}', StorageController::class)->where('path', '.*');
+
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/board', [PageController::class, 'board'])->name('board');
